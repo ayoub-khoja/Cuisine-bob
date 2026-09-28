@@ -261,14 +261,16 @@ export default function LoginPage() {
   );
 
   const cartPanel = (
-    <SafeImage
-      src="/stock_inventory.svg"
-      alt="Chariot"
-      width={520}
-      height={420}
-      priority
-      className="block h-[78%] max-h-[78%] w-auto max-w-[78%] object-contain"
-    />
+    <div className="auth-bg-float flex h-[78%] max-h-[78%] w-full items-center justify-center">
+      <SafeImage
+        src="/stock_inventory.svg"
+        alt="Chariot"
+        width={520}
+        height={420}
+        priority
+        className="block h-full max-h-full w-auto max-w-full object-contain"
+      />
+    </div>
   );
 
   return (
