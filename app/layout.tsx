@@ -5,7 +5,6 @@
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { KeyboardShortcutsProvider } from "@/components/providers/KeyboardShortcutsProvider";
-import { Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import React from "react";
 import { AuthProvider } from "@/contexts";
@@ -30,12 +29,6 @@ const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
   weight: "100 900",
-});
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  variable: "--font-poppins",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 /** Force dynamic rendering for all routes so useSearchParams etc. work without Suspense and pages render instantly. */
@@ -138,7 +131,7 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
     >
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
         style={{ overscrollBehavior: "none" }}
       >

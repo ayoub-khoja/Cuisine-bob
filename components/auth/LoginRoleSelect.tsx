@@ -62,8 +62,8 @@ export function LoginRoleSelect({
               : "text-gray-500 dark:text-white/80",
           )}
         />
-        <span className="flex-1 truncate text-left">
-          {selectedMeta?.label ?? "Select Role Based Test Account"}
+        <span className="flex-1 truncate text-right">
+          {selectedMeta?.label ?? "اختر حساباً تجريبياً حسب الدور"}
         </span>
       </SelectTrigger>
       <SelectContent
@@ -96,7 +96,7 @@ export function LoginRoleSelect({
           >
             <span className="flex items-center gap-2">
               <X className="h-4 w-4 shrink-0" />
-              <span>Clear Selection</span>
+              <span>إلغاء الاختيار</span>
             </span>
           </SelectItem>
         ) : null}

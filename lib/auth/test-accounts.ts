@@ -25,17 +25,17 @@ export const roleMeta: Record<
 > = {
   "guest-user": {
     icon: Shield,
-    label: "Guest User / Admin (test@admin.com)",
+    label: "مدير (test@admin.com)",
     hue: "sky",
   },
   "guest-supplier": {
     icon: Store,
-    label: "Supplier (test@supplier.com)",
+    label: "مزوّد (test@supplier.com)",
     hue: "amber",
   },
   "guest-client": {
     icon: ShoppingBag,
-    label: "Client (test@client.com)",
+    label: "حريف (test@client.com)",
     hue: "emerald",
   },
 };
