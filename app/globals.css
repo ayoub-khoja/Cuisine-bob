@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .poppins {
-  font-family: var(--font-poppins);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
@@ -114,6 +114,16 @@
   html:has(.auth-page-root) body {
     height: auto;
     overflow: auto;
+  }
+
+  html:has(.auth-page-root.auth-page-fit) {
+    scrollbar-gutter: auto;
+    height: 100%;
+    overflow: hidden;
+  }
+  html:has(.auth-page-root.auth-page-fit) body {
+    height: 100%;
+    overflow: hidden;
   }
 
   #main-content,
