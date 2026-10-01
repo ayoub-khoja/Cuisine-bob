@@ -263,7 +263,7 @@ export async function GET(request: NextRequest) {
           ? "/client"
           : user.role === "supplier"
             ? "/supplier"
-            : "/";
+            : "/admin/dashboard-overall-insights";
 
       const redirectUrl = new URL(roleDest, request.url);
       redirectUrl.searchParams.set("oauth_success", "true");

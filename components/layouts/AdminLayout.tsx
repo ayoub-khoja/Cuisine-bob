@@ -22,6 +22,7 @@ export default function AdminLayout({
   return (
     <Navbar>
       <PageWithSidebar
+        side="right"
         sidebarContent={<AdminSidebar initialCounts={initialCounts} />}
         sidebarCollapsed={<AdminSidebar collapsed initialCounts={initialCounts} />}
       >

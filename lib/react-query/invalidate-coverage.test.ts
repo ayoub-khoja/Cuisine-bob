@@ -17,7 +17,11 @@ const HOOKS_DIR = join(ROOT, "hooks/queries");
 const API_DIR = join(ROOT, "app/api");
 
 /** Hooks that intentionally scope invalidation (notifications — not full-app blast) */
-const SCOPED_INVALIDATION_FILES = new Set(["use-notifications.ts"]);
+const SCOPED_INVALIDATION_FILES = new Set([
+  "use-notifications.ts",
+  "use-daily-consumption.ts",
+  "use-free-ration-permit.ts",
+]);
 
 /** Components with inline fetch CRUD — exempt or must call invalidateAllRelatedQueries */
 const COMPONENT_FETCH_CRUD_ALLOWLIST = new Set([
@@ -115,6 +119,10 @@ const API_WRITE_EXEMPT = new Set([
   "app/api/shipping/rates/route.ts",
   "app/api/notifications/route.ts",
   "app/api/email/queue/process/route.ts",
+  "app/api/daily-consumption/route.ts",
+  "app/api/daily-consumption/[id]/route.ts",
+  "app/api/free-ration-permit/route.ts",
+  "app/api/free-ration-permit/[id]/route.ts",
 ]);
 
 const SERVER_INVALIDATE_PATTERNS = [

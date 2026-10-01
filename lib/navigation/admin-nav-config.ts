@@ -23,6 +23,15 @@ export type AdminNavItemConfig = {
   >;
 };
 
+export const ADMIN_MENU_ITEMS: AdminNavItemConfig[] = [
+  { href: "/admin/material-request", label: "طلب مواد" },
+  { href: "/admin/goods-acceptance", label: "محاضر قبول السلع" },
+  { href: "/admin/free-ration-permit", label: "اذن باعاشة مجانية" },
+  { href: "/admin/daily-consumption", label: "الاستهلاك اليومي" },
+  { href: "/admin/admin-log", label: "سجل الادارة" },
+];
+
+/*
 export const ADMIN_MY_STORE_ITEMS: AdminNavItemConfig[] = [
   {
     href: "/admin/dashboard-overall-insights",
@@ -90,14 +99,18 @@ export const ADMIN_MY_ACTIVITY_ITEMS: AdminNavItemConfig[] = [
 ];
 
 export const ADMIN_SETTINGS_EMAIL_HREF = "/admin/settings/email-preferences";
+*/
 
 /** Flat deduped admin sidebar paths for idle RSC warm (admin/user roles). */
 export function getAdminSidebarWarmPaths(): string[] {
   const paths = [
+    ...ADMIN_MENU_ITEMS.map((item) => item.href),
+    /*
     ...ADMIN_MY_STORE_ITEMS.map((item) => item.href),
     ...ADMIN_MANAGEMENT_ITEMS.map((item) => item.href),
     ...ADMIN_MY_ACTIVITY_ITEMS.map((item) => item.href),
     ADMIN_SETTINGS_EMAIL_HREF,
+    */
   ];
   return [...new Set(paths)];
 }

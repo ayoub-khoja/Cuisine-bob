@@ -15,7 +15,6 @@ import { useToast } from "@/hooks/use-toast";
 import { setPostLoginWelcome } from "@/lib/auth/post-login-welcome";
 import { AuthPageShell } from "@/components/auth/AuthPageShell";
 import { AuthFormCard } from "@/components/auth/AuthFormCard";
-import { SafeImage } from "@/components/ui/safe-image";
 import { AuthAnimatedBlock } from "@/components/auth/AuthAnimatedBlock";
 import {
   AUTH_FORM_ROW_STAGGER_MS,
@@ -46,7 +45,7 @@ export default function LoginPage() {
           ? "/client"
           : user?.role === "supplier"
             ? "/supplier"
-            : "/";
+            : "/admin/dashboard-overall-insights";
       window.location.href = dest;
     }
   }, [isLoggedIn, user]);
@@ -121,7 +120,7 @@ export default function LoginPage() {
           ? "/client"
           : userData.role === "supplier"
             ? "/supplier"
-            : "/";
+            : "/admin/dashboard-overall-insights";
       window.location.href = dest;
     } catch (error: unknown) {
       const axiosErr = error as {
@@ -144,49 +143,16 @@ export default function LoginPage() {
   const formRowDelay = (row: number) =>
     AUTH_FORM_STAGGER_BASE + row * AUTH_FORM_ROW_STAGGER_MS;
 
-  const leftPanel = (
-    <header
-      dir="rtl"
-      lang="ar"
-      className="grid w-full grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-4 sm:gap-8"
-    >
-      <SafeImage
-        src="/cuisine-bob/logo-min-intr.png"
-        alt="الإدارة العامة لوحدات التدخل"
-        width={160}
-        height={160}
-        priority
-        className="h-[clamp(5.25rem,17vh,9rem)] w-[clamp(5.25rem,17vh,9rem)] object-contain"
-      />
-      <div className="min-w-0 text-center">
-        <p className="text-base font-semibold leading-relaxed text-gray-900 dark:text-white sm:text-lg lg:text-xl">
-          الإدارة العامة لوحدات التدخل
-        </p>
-        <p className="mt-1 text-sm leading-relaxed text-gray-600 dark:text-white/80 sm:text-base">
-          إدارة حفظ النظام الجهوي بالشمال
-        </p>
-        <p className="text-sm leading-relaxed text-gray-600 dark:text-white/80 sm:text-base">
-          الفوج الجهوي لحفظ النظام بالمنستير
-        </p>
-      </div>
-      <SafeImage
-        src="/cuisine-bob/logo-police.png"
-        alt="الشرطة"
-        width={160}
-        height={160}
-        priority
-        className="h-[clamp(5.25rem,17vh,9rem)] w-[clamp(5.25rem,17vh,9rem)] object-contain"
-      />
-    </header>
-  );
-
   const rightPanel = (
     <AuthAnimatedBlock
       delayMs={AUTH_FORM_STAGGER_BASE}
       className="w-full max-w-md"
     >
       <div dir="rtl" lang="ar">
-      <AuthFormCard variant="login" className="w-full p-4 sm:p-6">
+      <AuthFormCard
+        variant="login"
+        className="w-full !border-2 !border-white !bg-white !bg-none p-6 !shadow-[0_28px_70px_rgba(15,23,42,0.55)] !backdrop-blur-none ring-4 ring-white/70 dark:!border-slate-700 dark:!bg-slate-950 dark:ring-slate-900/80 sm:p-8"
+      >
         <form onSubmit={handleSubmit} className="space-y-4">
           <AuthAnimatedBlock delayMs={formRowDelay(0)} className="space-y-2">
             <label
@@ -260,26 +226,15 @@ export default function LoginPage() {
     </AuthAnimatedBlock>
   );
 
-  const cartPanel = (
-    <SafeImage
-      src="/stock_inventory.svg"
-      alt="Chariot"
-      width={520}
-      height={420}
-      priority
-      className="block h-[78%] max-h-[78%] w-auto max-w-[78%] object-contain"
-    />
-  );
-
   return (
     <AuthPageShell
-      illustrationSrc="/stock_inventory.svg"
+      illustrationSrc="/cuisine-bob/login-img.png"
       illustrationAlt=""
       showIllustration={false}
+      backgroundSrc="/cuisine-bob/login-img.png"
       fitViewport
       alignEnd
-      top={leftPanel}
-      left={cartPanel}
+      left={null}
       right={rightPanel}
     />
   );
