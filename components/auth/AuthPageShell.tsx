@@ -17,6 +17,8 @@ type AuthPageShellProps = {
   /** Login: banner + card stacked and centered, no side column. */
   centered?: boolean;
   showIllustration?: boolean;
+  /** Full-bleed photo behind the shell (login only). */
+  backgroundSrc?: string;
 };
 
 /**
@@ -34,10 +36,24 @@ export function AuthPageShell({
   fitViewport = false,
   centered = false,
   showIllustration = true,
+  backgroundSrc,
 }: AuthPageShellProps) {
   return (
     <div className={`auth-page-root relative flex w-full flex-col overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.15),transparent_55%),radial-gradient(circle_at_bottom,_rgba(236,72,153,0.12),transparent_65%)] dark:bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.15),transparent_55%),radial-gradient(circle_at_bottom,_rgba(236,72,153,0.12),transparent_65%)] ${fitViewport ? "auth-page-fit h-dvh items-stretch justify-start" : "min-h-screen items-center justify-center"}`}>
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.3),transparent_60%)] dark:bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05),transparent_60%)]" />
+      {backgroundSrc ? (
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+          <SafeImage
+            src={backgroundSrc}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-fill"
+          />
+        </div>
+      ) : (
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.3),transparent_60%)] dark:bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.05),transparent_60%)]" />
+      )}
 
       {showIllustration ? (
         <div
@@ -68,6 +84,7 @@ export function AuthPageShell({
             {right}
           </div>
         ) : fitViewport ? (
+          left ? (
           <div className="grid min-h-0 flex-1 grid-cols-1 items-center gap-4 overflow-hidden pt-2 md:grid-cols-2 md:gap-8">
             <div className="flex h-full min-h-0 items-center justify-center overflow-hidden">
               {left}
@@ -76,6 +93,11 @@ export function AuthPageShell({
               {right}
             </div>
           </div>
+          ) : (
+            <div className="flex min-h-0 flex-1 items-center justify-center px-4">
+              <div className="w-full max-w-md translate-y-[8vh]">{right}</div>
+            </div>
+          )
         ) : (
         <div className="flex min-h-screen flex-col lg:flex-row lg:gap-8">
           <div className="relative hidden items-center justify-center py-6 lg:flex lg:w-1/2 lg:py-12">

@@ -11,20 +11,30 @@ export interface PageWithSidebarProps {
   sidebarContent: ReactNode;
   /** Collapsed (icon-only) sidebar for phone screens */
   sidebarCollapsed?: ReactNode;
+  /** Admin Arabic menus sit on the right; other pages stay on the left. */
+  side?: "left" | "right";
   children: ReactNode;
 }
 
 export default function PageWithSidebar({
   sidebarContent,
   sidebarCollapsed,
+  side = "left",
   children,
 }: PageWithSidebarProps) {
+  const onRight = side === "right";
+  const edgeBorder = onRight
+    ? "border-l border-gray-200/50 dark:border-white/10"
+    : "border-r border-gray-200/50 dark:border-white/10";
+
   return (
-    <div className="flex w-full gap-0 sm:gap-2 min-h-0">
+    <div
+      className={`flex w-full gap-0 sm:gap-2 min-h-0 ${onRight ? "flex-row-reverse" : ""}`}
+    >
       {/* Collapsed sidebar — phone only */}
       {sidebarCollapsed && (
         <aside
-          className="sm:hidden sticky top-0 z-10 flex h-[calc(100vh-3.5rem)] w-12 flex-shrink-0 flex-col overflow-y-auto overflow-x-hidden border-r border-gray-200/50 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl"
+          className={`sm:hidden sticky top-0 z-10 flex h-[calc(100vh-3.5rem)] w-12 flex-shrink-0 flex-col overflow-y-auto overflow-x-hidden ${edgeBorder} bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl`}
           aria-label="Page navigation"
         >
           {sidebarCollapsed}
@@ -40,7 +50,7 @@ export default function PageWithSidebar({
       {/* When no collapsed sidebar provided, show full sidebar always (legacy) */}
       {!sidebarCollapsed && (
         <aside
-          className="sm:hidden sticky top-0 z-10 flex h-[calc(100vh-3.5rem)] w-64 flex-shrink-0 flex-col overflow-y-auto border-r border-gray-200/50 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl"
+          className={`sm:hidden sticky top-0 z-10 flex h-[calc(100vh-3.5rem)] w-64 flex-shrink-0 flex-col overflow-y-auto ${edgeBorder} bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl`}
           aria-label="Page navigation"
         >
           {sidebarContent}
