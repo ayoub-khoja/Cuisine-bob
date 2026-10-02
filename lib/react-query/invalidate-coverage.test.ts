@@ -21,6 +21,7 @@ const SCOPED_INVALIDATION_FILES = new Set([
   "use-notifications.ts",
   "use-daily-consumption.ts",
   "use-free-ration-permit.ts",
+  "use-material-request.ts",
 ]);
 
 /** Components with inline fetch CRUD — exempt or must call invalidateAllRelatedQueries */
@@ -123,6 +124,8 @@ const API_WRITE_EXEMPT = new Set([
   "app/api/daily-consumption/[id]/route.ts",
   "app/api/free-ration-permit/route.ts",
   "app/api/free-ration-permit/[id]/route.ts",
+  "app/api/material-request/route.ts",
+  "app/api/material-request/[id]/route.ts",
 ]);
 
 const SERVER_INVALIDATE_PATTERNS = [

@@ -10,6 +10,7 @@ import {
   Package,
   ScrollText,
   Ticket,
+  Truck,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -29,6 +30,7 @@ const ADMIN_NAV_ICONS: Record<string, LucideIcon> = {
   "/admin/goods-acceptance": FileCheck,
   "/admin/free-ration-permit": Ticket,
   "/admin/daily-consumption": CalendarDays,
+  "/admin/suppliers": Truck,
   "/admin/admin-log": ScrollText,
   /*
   "/admin/dashboard-overall-insights": LayoutDashboard,

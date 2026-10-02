@@ -28,6 +28,7 @@ export const ADMIN_MENU_ITEMS: AdminNavItemConfig[] = [
   { href: "/admin/goods-acceptance", label: "محاضر قبول السلع" },
   { href: "/admin/free-ration-permit", label: "اذن باعاشة مجانية" },
   { href: "/admin/daily-consumption", label: "الاستهلاك اليومي" },
+  { href: "/admin/suppliers", label: "المزودون" },
   { href: "/admin/admin-log", label: "سجل الادارة" },
 ];
 
