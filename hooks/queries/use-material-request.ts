@@ -2,6 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import type { RequestInput, RequestListItem, RequestRecord } from "@/lib/material-request/sheet";
+import { adminLogKey } from "@/hooks/queries/use-admin-log";
 
 const rootKey = ["material-request"] as const;
 
@@ -69,6 +70,7 @@ export function useSaveMaterialRequest() {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: rootKey });
+      await queryClient.invalidateQueries({ queryKey: adminLogKey });
     },
   });
 }
@@ -86,6 +88,7 @@ export function useDeleteMaterialRequest() {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: rootKey });
+      await queryClient.invalidateQueries({ queryKey: adminLogKey });
     },
   });
 }
