@@ -7,6 +7,7 @@ import {
   CalendarDays,
   ClipboardList,
   FileCheck,
+  LayoutDashboard,
   Package,
   ScrollText,
   Ticket,
@@ -26,6 +27,7 @@ import type { AdminCounts } from "@/types";
 
 /** Icon map for admin sidebar items (REQ-0094 — hrefs live in admin-nav-config). */
 const ADMIN_NAV_ICONS: Record<string, LucideIcon> = {
+  "/admin/dashboard-overall-insights": LayoutDashboard,
   "/admin/material-request": ClipboardList,
   "/admin/goods-acceptance": FileCheck,
   "/admin/free-ration-permit": Ticket,

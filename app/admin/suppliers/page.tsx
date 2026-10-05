@@ -1,7 +1,7 @@
-import AdminMenuPlaceholder from "@/components/admin/AdminMenuPlaceholder";
+import KitchenSupplierList from "@/components/admin/kitchen-suppliers/KitchenSupplierList";
 
 export const dynamic = "force-dynamic";
 
 export default function SuppliersMenuPage() {
-  return <AdminMenuPlaceholder title="المزودون" />;
+  return <KitchenSupplierList />;
 }

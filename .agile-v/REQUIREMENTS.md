@@ -5,6 +5,75 @@ Canonical REQ source. All artifacts link via `REQ-XXXX`. Current cycle: C2. Stat
 
 ---
 
+## REQ-0240 — Kitchen supplier registry (company, tax id, products)
+
+| Field | Value |
+|-------|-------|
+| **Priority** | P1 |
+| **Risk** | R2 |
+| **Status** | verify |
+| **Cycle** | C2 |
+| **Parent** | kitchen admin menus (`/admin/suppliers`) |
+
+**Intent:** Replace the المزودون placeholder with a paginated supplier list and an add/edit form for company name, matricule fiscale, and supplied products.
+
+**Acceptance criteria**
+
+- AC1: `/admin/suppliers` lists suppliers with server pagination (page, page size, search)
+- AC2: Create requires company name, tax id, and at least one product
+- AC3: Tax id is unique; duplicate returns 409
+- AC4: List payload previews product names; full products load only when editing
+- AC5: Kitchen auth gate matches daily consumption (no client/supplier role)
+- AC6: A product name belongs to one supplier; material request shows that supplier when the material is chosen
+
+**Artifacts:** `lib/kitchen-suppliers/*`, `app/api/kitchen-suppliers/*`, `components/admin/kitchen-suppliers/*`, `app/admin/suppliers/page.tsx`, `components/admin/material-request/MaterialRequestForm.tsx`
+
+---
+
+## REQ-0241 — Goods acceptance generated from material request
+
+| Field | Value |
+|-------|-------|
+| **Priority** | P1 |
+| **Risk** | R2 |
+| **Status** | verify |
+| **Cycle** | C2 |
+| **Parent** | REQ-0240 |
+
+**Intent:** Saving طلب مواد creates one محضر قبول السلع per supplier, with the printed-form layout.
+
+**Acceptance criteria**
+
+- AC1: POST/PUT material request upserts one acceptance sheet per supplier; DELETE removes them
+- AC2: `/admin/goods-acceptance` lists those sheets with pagination
+- AC3: Preview matches the paper: beneficiary, delivery number, supplier, goods, notes, committee, signature
+
+**Artifacts:** `lib/goods-acceptance/*`, `app/api/goods-acceptance/*`, `components/admin/goods-acceptance/*`
+
+---
+
+## REQ-0242 — Restaurant overview under the banner
+
+| Field | Value |
+|-------|-------|
+| **Priority** | P1 |
+| **Risk** | R2 |
+| **Status** | verify |
+| **Cycle** | C2 |
+| **Parent** | REQ-0240 |
+
+**Intent:** The page under the coastal banner matches the restaurant dashboard: Arabic KPIs, quick actions, sales chart, category split, latest reports, and the four modules.
+
+**Acceptance criteria**
+
+- AC1: `/admin/dashboard-overall-insights` renders the Arabic restaurant overview
+- AC2: KPI numbers come from the existing dashboard stats
+- AC3: Quick actions and module cards open the kitchen pages already in the sidebar
+
+**Artifacts:** `components/admin/kitchen-overview/KitchenOverview.tsx`, `app/admin/dashboard-overall-insights/page.tsx`
+
+---
+
 ## REQ-0239 — BI averagePrice/valueDensity currency parity
 
 | Field | Value |

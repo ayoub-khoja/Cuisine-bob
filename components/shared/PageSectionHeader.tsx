@@ -41,7 +41,7 @@ export function PageSectionHeader({
   return (
     <div
       className={cn(
-        "flex items-stretch gap-2 sm:gap-3 text-left",
+        "flex items-stretch gap-2 sm:gap-3 text-start",
         PAGE_SECTION_HEADER_SPACING_CLASS,
         className,
       )}
@@ -57,14 +57,10 @@ export function PageSectionHeader({
           <Icon className={cn("h-5 w-5 sm:h-6 sm:w-6", toneConfig.icon)} />
         </div>
       )}
-      <div className="flex min-w-0 flex-1 flex-col justify-center">
-        <TitleTag className={TYPO_PAGE_HEADER}>
-          {title}
-        </TitleTag>
+      <div className="flex min-w-0 flex-1 flex-col justify-center text-start">
+        <TitleTag className={cn(TYPO_PAGE_HEADER, "text-start")}>{title}</TitleTag>
         {description != null && description !== "" && (
-          <p className={TYPO_SUBTITLE}>
-            {description}
-          </p>
+          <p className={cn(TYPO_SUBTITLE, "text-start")}>{description}</p>
         )}
       </div>
       {trailing}

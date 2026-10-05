@@ -5,8 +5,8 @@
 | **Cycle** | C2 (C1 Gate 2 still PENDING — watch started) |
 | **Phase** | Gate 2 open — 24h Sentry quiet watch + local harden ready to ship |
 | **Stopped** | — |
-| **Session** | 2026-09-09 — prod-harden: typed list URL + invoice fee lock + currency |
-| **Active REQ** | REQ-0009 Gate 2 (`gate2-sentry-24h`) |
+| **Session** | 2026-10-05 — REQ-0241 goods acceptance auto-created from طلب مواد |
+| **Active REQ** | REQ-0241 (verify) · Gate 2 still `gate2-sentry-24h` |
 | **Done range** | … + **0232**–**0239** + harden W1–W5 (local) |
 | **Local tip** | pending commit (parent `b71dad2`) |
 | **Prod deploy** | READY `dpl_CM4s3niMwoccbc1ny2yPWGESrzko` · SHA `3feceb7` · alias `stockly-inventory.vercel.app` |
