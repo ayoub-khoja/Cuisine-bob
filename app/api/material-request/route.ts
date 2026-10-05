@@ -4,6 +4,9 @@ import { logger } from "@/lib/logger";
 import { requireKitchenUser } from "@/lib/daily-consumption/access";
 import { parseRequest } from "@/lib/material-request/sheet";
 import { materialRequestCollection } from "@/lib/material-request/store";
+import { resolveRequestSuppliers } from "@/lib/kitchen-suppliers/catalog";
+import { loadProductCatalog } from "@/lib/kitchen-suppliers/catalog-data";
+import { syncGoodsAcceptances } from "@/lib/goods-acceptance/store";
 
 export async function GET(request: NextRequest) {
   const auth = await requireKitchenUser(request);
@@ -49,15 +52,30 @@ export async function POST(request: NextRequest) {
     if (typeof parsed === "string") {
       return NextResponse.json({ error: parsed }, { status: 400 });
     }
+    const withSuppliers = resolveRequestSuppliers(
+      parsed.lines,
+      await loadProductCatalog(),
+    );
+    if (typeof withSuppliers === "string") {
+      return NextResponse.json({ error: withSuppliers }, { status: 400 });
+    }
     const collection = await materialRequestCollection();
     const now = new Date();
     const created = await collection.insertOne({
       _id: new ObjectId(),
       ...parsed,
+      lines: withSuppliers,
       createdAt: now,
       updatedAt: now,
       createdBy: auth.user.id,
       updatedBy: auth.user.id,
+    });
+    await syncGoodsAcceptances({
+      requestId: created.insertedId.toHexString(),
+      serial: parsed.serial,
+      dateKey: parsed.dateKey,
+      lines: withSuppliers,
+      userId: auth.user.id,
     });
     return NextResponse.json({ id: created.insertedId.toHexString() }, { status: 201 });
   } catch (error) {

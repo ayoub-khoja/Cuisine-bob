@@ -5,6 +5,9 @@ export type RequestLine = {
   name: string;
   quantity: number;
   unit: string;
+  /** Supplier that sells this material. One product belongs to one supplier. */
+  supplierId?: string;
+  supplierName?: string;
 };
 
 /** Signature line under the unit title on the paper. */

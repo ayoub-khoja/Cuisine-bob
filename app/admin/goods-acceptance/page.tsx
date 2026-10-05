@@ -1,7 +1,7 @@
-import AdminMenuPlaceholder from "@/components/admin/AdminMenuPlaceholder";
+import GoodsAcceptanceHistory from "@/components/admin/goods-acceptance/GoodsAcceptanceHistory";
 
 export const dynamic = "force-dynamic";
 
 export default function GoodsAcceptancePage() {
-  return <AdminMenuPlaceholder title="محاضر قبول السلع" />;
+  return <GoodsAcceptanceHistory />;
 }

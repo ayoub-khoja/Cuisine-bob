@@ -706,3 +706,19 @@ Format: `TIMESTAMP | AGENT | DECISION | RATIONALE | REQ-ID`
 2026-09-09T17:20:00+02:00 | red-team | Harden W1–W5 verify PASS WITH WARNINGS; security PASS; Gate 2 still PENDING | lint ✓ tsc ✓ vitest hub 12 ✓ invalidate 222 ✓; no fake Gate 2 close | REQ-0009
 
 2026-09-09T17:55:00+02:00 | build-agent | Chart label polish — all non-zero Recharts points | lastOnly default false; horizontal bar + pie helpers; CHART_LABEL_RIGHT_MARGIN; zero-skip bars | REQ-0077
+
+2026-10-05T11:45:00+01:00 | build-agent | Kitchen supplier collection with unique tax id, paged list, product lines | Separate from catalog Supplier; list returns product preview only | REQ-0240
+
+2026-10-05T11:56:00+01:00 | build-agent | Material line resolves the single supplier that sells that product | Unique product name across kitchen suppliers; picker shows المزود | REQ-0240
+
+2026-10-05T12:10:00+01:00 | build-agent | Material request save upserts one goods-acceptance sheet per supplier | Paper layout for محضر قبول السلع; delete cascades | REQ-0241
+
+2026-10-05T12:22:00+01:00 | build-agent | Page section titles use text-start so Arabic headers sit beside the icon | RTL kitchen lists; LTR pages stay left | REQ-0240
+
+2026-10-05T12:24:00+01:00 | build-agent | Navbar keeps existing sections; police logo left, interior logo right | No other navbar changes | REQ-0240
+
+2026-10-05T12:32:00+01:00 | build-agent | Sidebar lists نظرة عامة first; login already opens that dashboard | No other admin modules changed | REQ-0240
+
+2026-10-05T12:38:00+01:00 | build-agent | Coastal banner sits full width directly under the navbar | Navbar links and logos unchanged | REQ-0240
+
+2026-10-05T12:42:00+01:00 | build-agent | Overview under the banner is the Arabic restaurant dashboard | Real dashboard stats; kitchen module links | REQ-0242

@@ -22,6 +22,7 @@ const SCOPED_INVALIDATION_FILES = new Set([
   "use-daily-consumption.ts",
   "use-free-ration-permit.ts",
   "use-material-request.ts",
+  "use-kitchen-suppliers.ts",
 ]);
 
 /** Components with inline fetch CRUD — exempt or must call invalidateAllRelatedQueries */
@@ -126,6 +127,8 @@ const API_WRITE_EXEMPT = new Set([
   "app/api/free-ration-permit/[id]/route.ts",
   "app/api/material-request/route.ts",
   "app/api/material-request/[id]/route.ts",
+  "app/api/kitchen-suppliers/route.ts",
+  "app/api/kitchen-suppliers/[id]/route.ts",
 ]);
 
 const SERVER_INVALIDATE_PATTERNS = [
@@ -157,6 +160,10 @@ const DIRECT_FETCH_WRITE =
 
 function readRepoFile(relativePath: string): string {
   return readFileSync(join(ROOT, relativePath), "utf8");
+}
+
+function repoRelative(absPath: string): string {
+  return relative(ROOT, absPath).replaceAll("\\", "/");
 }
 
 function walkFiles(
@@ -220,7 +227,7 @@ describe("mutation invalidation coverage (components using hooks)", () => {
   );
 
   for (const absPath of componentFiles) {
-    const rel = relative(ROOT, absPath);
+    const rel = repoRelative(absPath);
     const content = readFileSync(absPath, "utf8");
     const usesMutate =
       content.includes(".mutate(") || content.includes("mutateAsync(");
@@ -245,7 +252,7 @@ describe("mutation invalidation coverage (inline fetch CRUD components)", () => 
   );
 
   for (const absPath of componentFiles) {
-    const rel = relative(ROOT, absPath);
+    const rel = repoRelative(absPath);
     const content = readFileSync(absPath, "utf8");
     if (!DIRECT_FETCH_WRITE.test(content)) continue;
 
@@ -371,7 +378,7 @@ describe("API write routes — spec/exempt completeness", () => {
   const routeFiles = walkFiles(API_DIR, (n) => n === "route.ts");
 
   for (const absPath of routeFiles) {
-    const rel = relative(ROOT, absPath);
+    const rel = repoRelative(absPath);
     const content = readFileSync(absPath, "utf8");
     if (!hasWriteHandler(content)) continue;
 
@@ -385,7 +392,7 @@ describe("API write routes server cache invalidation", () => {
   const routeFiles = walkFiles(API_DIR, (n) => n === "route.ts");
 
   for (const absPath of routeFiles) {
-    const rel = relative(ROOT, absPath);
+    const rel = repoRelative(absPath);
     const content = readFileSync(absPath, "utf8");
     if (!hasWriteHandler(content)) continue;
 

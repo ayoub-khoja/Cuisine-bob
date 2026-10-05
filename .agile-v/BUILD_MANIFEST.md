@@ -687,3 +687,10 @@
 
 | ART-0223e | REQ-0077 | `lib/ui/chart-point-label.tsx` + admin/BI/catalog/warehouse chart consumers | All non-zero point labels; horizontal bar + pie helpers |
 | TC-0223e | REQ-0077 | `chart-point-label.test.ts` 5/5 · eslint · tsc · build ✓ | chart label polish |
+
+| ART-0240a | REQ-0240 | `lib/kitchen-suppliers/*` + `app/api/kitchen-suppliers/*` | company, tax id, products |
+| ART-0240b | REQ-0240 | `components/admin/kitchen-suppliers/*` + `app/admin/suppliers/page.tsx` | paginated list + add/edit |
+| TC-0240 | REQ-0240 | supplier tests 3 ✓ · invalidate 254 ✓ · eslint ✓ · tsc ✓ | local |
+| ART-0241a | REQ-0241 | `lib/goods-acceptance/*` + material-request POST/PUT/DELETE sync | one sheet per supplier |
+| ART-0241b | REQ-0241 | `components/admin/goods-acceptance/*` + `app/admin/goods-acceptance/page.tsx` | paper preview, list, PDF |
+| TC-0241 | REQ-0241 | sheet test 1 ✓ · eslint ✓ · tsc ✓ | local |

@@ -1,11 +1,13 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import type { RequestInput, RequestListItem, RequestRecord } from "@/lib/material-request/sheet";
-import { adminLogKey } from "@/hooks/queries/use-admin-log";
-import { goodsAcceptanceKey } from "@/hooks/queries/use-goods-acceptance";
+import type {
+  KitchenSupplierInput,
+  KitchenSupplierListItem,
+  KitchenSupplierRecord,
+} from "@/lib/kitchen-suppliers/supplier";
 
-const rootKey = ["material-request"] as const;
+const rootKey = ["kitchen-suppliers"] as const;
 
 async function readError(response: Response): Promise<string> {
   try {
@@ -16,21 +18,27 @@ async function readError(response: Response): Promise<string> {
   }
 }
 
-export function useMaterialRequestList(page: number, pageSize: number, date: string) {
+export function useKitchenSupplierList(
+  page: number,
+  pageSize: number,
+  query: string,
+) {
   return useQuery({
-    queryKey: [...rootKey, "list", page, pageSize, date],
+    queryKey: [...rootKey, "list", page, pageSize, query],
+    placeholderData: (previous, previousQuery) =>
+      previousQuery?.queryKey.at(-1) === query ? previous : undefined,
     queryFn: async () => {
       const params = new URLSearchParams({
         page: String(page),
         pageSize: String(pageSize),
       });
-      if (date) params.set("date", date);
-      const response = await fetch(`/api/material-request?${params}`, {
+      if (query) params.set("q", query);
+      const response = await fetch(`/api/kitchen-suppliers?${params}`, {
         credentials: "include",
       });
       if (!response.ok) throw new Error(await readError(response));
       return (await response.json()) as {
-        items: RequestListItem[];
+        items: KitchenSupplierListItem[];
         total: number;
         page: number;
         pageSize: number;
@@ -39,31 +47,36 @@ export function useMaterialRequestList(page: number, pageSize: number, date: str
   });
 }
 
-export function useMaterialRequest(id: string | undefined) {
+export function useKitchenSupplier(id: string | undefined) {
   return useQuery({
     queryKey: [...rootKey, "detail", id],
     enabled: Boolean(id),
     queryFn: async () => {
-      const response = await fetch(`/api/material-request/${id}`, {
+      const response = await fetch(`/api/kitchen-suppliers/${id}`, {
         credentials: "include",
       });
       if (!response.ok) throw new Error(await readError(response));
-      return (await response.json()) as RequestRecord;
+      return (await response.json()) as KitchenSupplierRecord;
     },
   });
 }
 
-export function useSaveMaterialRequest() {
+export function useSaveKitchenSupplier() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (variables: { id?: string; request: RequestInput }) => {
+    mutationFn: async (variables: {
+      id?: string;
+      supplier: KitchenSupplierInput;
+    }) => {
       const response = await fetch(
-        variables.id ? `/api/material-request/${variables.id}` : "/api/material-request",
+        variables.id
+          ? `/api/kitchen-suppliers/${variables.id}`
+          : "/api/kitchen-suppliers",
         {
           method: variables.id ? "PUT" : "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(variables.request),
+          body: JSON.stringify(variables.supplier),
         },
       );
       if (!response.ok) throw new Error(await readError(response));
@@ -71,17 +84,15 @@ export function useSaveMaterialRequest() {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: rootKey });
-      await queryClient.invalidateQueries({ queryKey: adminLogKey });
-      await queryClient.invalidateQueries({ queryKey: goodsAcceptanceKey });
     },
   });
 }
 
-export function useDeleteMaterialRequest() {
+export function useDeleteKitchenSupplier() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (variables: { id: string }) => {
-      const response = await fetch(`/api/material-request/${variables.id}`, {
+      const response = await fetch(`/api/kitchen-suppliers/${variables.id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -90,8 +101,6 @@ export function useDeleteMaterialRequest() {
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: rootKey });
-      await queryClient.invalidateQueries({ queryKey: adminLogKey });
-      await queryClient.invalidateQueries({ queryKey: goodsAcceptanceKey });
     },
   });
 }

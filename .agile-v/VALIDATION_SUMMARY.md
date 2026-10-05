@@ -1,5 +1,38 @@
 # Validation Summary — Cycle C1
 
+**Generated:** 2026-10-05 (REQ-0241 goods acceptance)
+**eval_gate_status:** PENDING (Human Gate 2 — watch in progress)
+**Active:** REQ-0241 verify + 24h Sentry quiet (`gate2-sentry-24h`)
+
+## REQ-0241 goods acceptance (2026-10-05)
+
+| Check | Result |
+| ----- | ------ |
+| Grouping | vitest `lib/goods-acceptance/sheet.test.ts` 1 ✓ — one sheet per supplier, quantity is the bare number |
+| Lint | eslint on goods-acceptance + material-request write path ✓ |
+| Browser | not clicked while logged in; unauthenticated API expected 401 |
+| Gate 2 | Still PENDING |
+
+---
+
+**Generated:** 2026-10-05 (REQ-0240 kitchen suppliers)
+**eval_gate_status:** PENDING (Human Gate 2 — watch in progress)
+**Active:** REQ-0240 verify + 24h Sentry quiet (`gate2-sentry-24h`)
+
+## REQ-0240 kitchen suppliers (2026-10-05)
+
+| Check | Result |
+| ----- | ------ |
+| Parser | vitest `lib/kitchen-suppliers/supplier.test.ts` 3 ✓ |
+| Invalidation | 254 ✓ (kitchen routes exempt; Windows path normalize) |
+| Lint | eslint on new supplier files ✓ |
+| Types | `tsc --noEmit` ✓ |
+| API | unauthenticated GET `/api/kitchen-suppliers` → 401 |
+| Browser | dev log: POST 201 then list GET 200 on `/admin/suppliers` |
+| Gate 2 | Still PENDING |
+
+---
+
 **Generated:** 2026-09-09 (prod-harden W1–W5 — typed URL lists + invoice fees + currency)
 **eval_gate_status:** PENDING (Human Gate 2 — watch in progress)
 **Active:** 24h Sentry quiet (`gate2-sentry-24h`)

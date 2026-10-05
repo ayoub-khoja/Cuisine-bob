@@ -24,6 +24,7 @@ export type AdminNavItemConfig = {
 };
 
 export const ADMIN_MENU_ITEMS: AdminNavItemConfig[] = [
+  { href: "/admin/dashboard-overall-insights", label: "نظرة عامة" },
   { href: "/admin/material-request", label: "طلب مواد" },
   { href: "/admin/goods-acceptance", label: "محاضر قبول السلع" },
   { href: "/admin/free-ration-permit", label: "اذن باعاشة مجانية" },

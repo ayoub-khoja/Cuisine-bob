@@ -37,6 +37,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
 import { SafeAvatarImage } from "@/components/ui/safe-avatar-image";
+import { SafeImage } from "@/components/ui/safe-image";
 import { resolveUserAvatarSources } from "@/lib/ui/user-avatar-sources";
 import { useTheme } from "next-themes";
 import ScrollControl from "../shared/ScrollControl";
@@ -201,6 +202,7 @@ export default function Navbar({ children }: NavbarProps) {
 
   // If children prop is provided, wrap with full layout, otherwise just return navbar
   const navbarContent = (
+    <>
     <header className="sticky top-0 z-50 w-full h-[72px] min-h-[72px] border-b border-gray-200/50 dark:border-white/10 bg-gradient-to-br from-white/90 via-white/85 to-white/80 dark:from-white/10 dark:via-white/10 dark:to-white/5 backdrop-blur-2xl shadow-[0_10px_30px_rgba(2,132,199,0.15)] dark:shadow-[0_10px_30px_rgba(15,23,42,0.25)] will-change-transform transform-gpu">
       {/* Skip to main content - visible on focus for keyboard/screen reader users (WCAG 2.1) */}
       <a
@@ -211,8 +213,18 @@ export default function Navbar({ children }: NavbarProps) {
       </a>
       {/* min-w-0 on flex children instead of overflow-x-hidden — hidden overflow-y would clip notification portal ancestors */}
       <div
-        className={`${APP_SHELL_WIDTH_CLASS} flex h-full items-center justify-between gap-2 px-2 sm:px-4 lg:px-6`}
+        dir="ltr"
+        className={`${APP_SHELL_WIDTH_CLASS} flex h-full items-center gap-2 px-2 sm:px-4 lg:px-6`}
       >
+        <SafeImage
+          src="/cuisine-bob/logo-police.png"
+          alt="الشرطة"
+          width={1275}
+          height={1234}
+          priority
+          className="h-12 w-auto shrink-0 object-contain sm:h-14"
+        />
+        <div className="flex min-w-0 flex-1 items-center justify-between gap-2">
         {/* Left Section - Logo and Brand (REQ-0094: Link prefetch for instant home nav) */}
         <div className="flex items-center gap-2">
           <Link
@@ -398,6 +410,15 @@ export default function Navbar({ children }: NavbarProps) {
             </Button>
           </div>
         </div>
+        </div>
+        <SafeImage
+          src="/cuisine-bob/logo-min-intr.png"
+          alt="وزارة الداخلية"
+          width={1039}
+          height={1514}
+          priority
+          className="h-12 w-auto shrink-0 object-contain sm:h-14"
+        />
       </div>
 
       {/* Mobile Menu Dropdown (LG and below) */}
@@ -521,6 +542,18 @@ export default function Navbar({ children }: NavbarProps) {
         </div>
       )}
     </header>
+    {pathname === "/admin/dashboard-overall-insights" ? (
+      <SafeImage
+        src={`/cuisine-bob/${encodeURIComponent("Bannière côtière de la police tunisienne.png")}`}
+        alt="مطعم الفوج الجهوي بالمنستير"
+        width={2172}
+        height={362}
+        priority
+        className="block h-auto w-full"
+        style={{ width: "100%", height: "auto" }}
+      />
+    ) : null}
+    </>
   );
 
   // If children provided, wrap with full layout structure
